@@ -6,7 +6,8 @@
         <hud_scale>1</hud_scale>
     </global>
     <tetsouo>
-        <anchor_x>0</anchor_x>
-        <anchor_y>0</anchor_y>
+        <anchor_x>784</anchor_x>
+        <anchor_y>1010</anchor_y>
+        <hud_scale>1.2</hud_scale>
     </tetsouo>
 </settings>

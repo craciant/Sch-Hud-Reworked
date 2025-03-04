@@ -9,6 +9,10 @@ _addon.author                = 'Original NeonRAGE / Reworked Tetsouo'
 _addon.version               = '1.2'
 _addon.commands              = { 'schud' } -- Type //schud in-game
 
+local config                 = require('config')
+local defaults               = { anchor_x = 800, anchor_y = 1040, hud_scale = 1.0 }
+local settings               = config.load('data/settings.xml', defaults)
+
 local texts                  = require('texts')
 
 ------------------------------------------------------------------------------
@@ -20,13 +24,13 @@ local strat_text             = texts.new("")
 ------------------------------------------------------------------------------
 -- HUD Scale (zoom). 1.0 = normal
 ------------------------------------------------------------------------------
-local hud_scale              = 1.0
+local hud_scale              = settings.hud_scale
 
 ------------------------------------------------------------------------------
 -- HUD Anchor (top-left corner)
 ------------------------------------------------------------------------------
-local anchor_x               = 800
-local anchor_y               = 1040
+local anchor_x               = settings.anchor_x
+local anchor_y               = settings.anchor_y
 
 -- Base size of the HUD images
 local base_width             = 200
@@ -375,6 +379,9 @@ windower.register_event('addon command', function(command, ...)
 		local new_scale = tonumber(args[1])
 		if new_scale then
 			hud_scale = new_scale
+			settings.hud_scale = new_scale
+			config.save(settings) -- Sauvegarde dans settings.xml
+
 			windower.add_to_chat(207, '[SCHud] Scale set to ' .. hud_scale)
 			reload_hud()
 			update_visibility_with_buff_check()
@@ -385,20 +392,13 @@ windower.register_event('addon command', function(command, ...)
 		local x = tonumber(args[1])
 		local y = tonumber(args[2])
 		if x and y then
-			-- Save old position before assigning new
-			local old_x, old_y = anchor_x, anchor_y
-
 			anchor_x = x
 			anchor_y = y
+			settings.anchor_x = x
+			settings.anchor_y = y
+			config.save(settings) -- Sauvegarde dans settings.xml
 
-			windower.add_to_chat(
-				207,
-				string.format(
-					'[SCHud] Position changed from (%d, %d) to (%d, %d).',
-					old_x, old_y, anchor_x, anchor_y
-				)
-			)
-
+			windower.add_to_chat(207, string.format('[SCHud] Position set to (%d, %d).', anchor_x, anchor_y))
 			reload_hud()
 			update_visibility_with_buff_check()
 		else
