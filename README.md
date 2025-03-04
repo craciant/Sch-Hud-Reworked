@@ -1,91 +1,155 @@
-# SCH-hud Reworked
+# SCH-Hud Reworked (v1.3)
 
-SCH-Hud Reworked is an enhanced version of the original SCH-Hud addon created by neonrage. The addon displays a book on your screen, offering an immersive interface to track your stratagem charges and cooldown.
+SCH-Hud Reworked is an enhanced version of the original SCH-Hud addon created by neonrage.  
+This addon displays a book on your screen, offering an immersive interface to track your **stratagem charges** and **cooldown timers**.
 
-# Original Credits:
+---
 
-- Thanks to neonrage for the original SCH-Hud addon.
+## 🏆 Original Credits:
+
+- Thanks to **neonrage** for the original SCH-Hud addon.
 - Original repository link: [SCH-Hud](https://github.com/neon-rage/sch-hud)
 
-# Base Features (from the original SCH-Hud):
+---
 
-- The book interface visualizes stratagem information, with the left page displaying the number of available stratagems and the right page showing the recast timer for the next stratagem.
-- The book changes color to purple when Dark Arts and add a purple glow when Addendum: Black is active.
-- The book changes color to white when Light Arts and add a white glow when Addendum: White is active.
-- Originally, the addon was designed to work only when SCH was your main job.
+## 📝 Base Features (from the original SCH-Hud):
 
-# New Features and Enhancements (in the Reworked Version):
+- The **book interface** visualizes stratagem information:
+  - **Left page** → Shows the number of available stratagems.
+  - **Right page** → Displays the recast timer for the next stratagem.
+- The book changes color depending on active **Arts**:
+  - **Dark Arts** → Purple book, with a purple glow when **Addendum: Black** is active.
+  - **Light Arts** → White book, with a yellow glow when **Addendum: White** is active.
+- Originally, the addon was designed to work **only when SCH was your main job**.
 
-- Support for SCH as a Sub Job:
-  The HUD now works when SCH is your sub job, displaying the same functionality as if SCH were your main job. This includes correctly handling stratagem charges and recast timers, based on the sub-job level and job points.
+---
 
-- Improved Graphics:
-  We have completely revamped the visuals:
-  Necronomicon style for Dark Arts, with a purple glow when Addendum: Black is active.
-  Altana Sun style for Light Arts, with a yellow glow when Addendum: White is active.
-  Visual elements were designed to be more immersive, with each mode resembling a distinct book style depending on which Arts are active.
+## ✨ New Features and Enhancements (Version 1.3):
 
-- Automatic Display Management:
-  The addon now automatically manages the display of the book HUD based on whether your main or sub job is SCH.
-  No more need for GearSwap integration to manually handle this, making the addon self-sufficient.
+### 💩 **New In-Game Commands**
 
-- Odyssey Sheol Gaol Fix:
-  The addon now properly handles situations in Odyssey Sheol Gaol where the sub job is set to 0. This ensures that no errors or incorrect HUD display occur when you have no sub job active in this zone.
+Added support for user commands to easily adjust HUD settings **without modifying the Lua file**.
 
-- Repositioned Stratagems and Timer:
-  The number of stratagems and the cooldown timer have been adjusted and placed to resemble the numbering of pages in a book, creating a more immersive visual experience.
+Use these commands in the Windower console:
 
-# Customization:
+- **Display help:**
+  ```
+  //schud help
+  ```
+- **Adjust HUD scale:**
+  ```
+  //schud scale <number>
+  ```
+  Example:
+  ```
+  //schud scale 1.2
+  ```
+- **Move the HUD position:**
+  ```
+  //schud pos <x> <y>
+  ```
+  Example:
+  ```
+  //schud pos 900 1050
+  ```
 
-You can adjust the position of the book on your screen by modifying the following lines in the Sch-Hud-Reworked.lua file:
+💾 **These settings are now saved and persist after reloading the addon!**
 
-```lua
-local iPosition_x = 800
-local iPosition_y = 1040
+---
+
+### 💩 **Bug Fixes and Improvements**
+
+- **Fixed HUD disappearing in Odyssey Sheol Gaol** when the sub job is forcibly set to level 0.
+- **Fixed issues in Dynamis Dreamworld** where the sub job is absent or restricted.
+- **Improved auto-display management** to ensure the HUD only appears when SCH (main or sub) is active.
+- **Refactored graphic scaling & positioning** for a cleaner visual experience.
+
+---
+
+## 🎨 Customization:
+
+You **no longer** need to modify the Lua file to adjust position and scale.  
+Use the in-game commands (see above) to set your preferences.
+
+---
+
+## 📝 Installation:
+
+1️⃣ **Extract the Folder:**  
+Extract the `Sch-Hud-Reworked` folder into:
+
+```
+Windower/addons/
 ```
 
-# Installation:
+2️⃣ **Auto-Load on Startup:**  
+Add the following line to your `init.txt` in:
 
-1 - Extract the Folder:
-Extract the Sch-Hud-Reworked folder into the following directory:
-windower/addons/
-
-2 - Add to init.txt:
-To ensure the addon loads automatically when you start Windower, add the following line to your init.txt file, located in:
+```
 Windower/scripts/init.txt
-Add this line:
+```
+
+```
 lua load Sch-Hud-Reworked
+```
 
-3 - Launch the Addon in-Game:
-If you prefer to manually launch the addon or if you didn't add it to your init.txt, you can also load it directly in-game by using the following command in the Windower console:
-//lua load Sch-Hud-Reworked
+3️⃣ **Manual Load (In-Game):**  
+Use these commands in the Windower console:
+
+```
+/lua load Sch-Hud-Reworked
+```
+
 or the shorter version:
-//lua l Sch-Hud-Reworked
-4 - Reload Addons:
-After making the changes, either restart Windower or use the in-game command:
-//lua reload Sch-Hud-Reworked
-This will ensure the SCH-Hud Reworked addon loads automatically every time you launch Windower.
 
-Adjust these values to position the book where you want it on the screen.
-Then reload the addons In-game
-//lua reload Sch-Hud-Reworked
+```
+/lua l Sch-Hud-Reworked
+```
 
-# Dark Arts:
+4️⃣ **Reload After Changes:**  
+After adjusting settings, reload the addon:
 
-![alt text](https://i.imgur.com/8rAO6CH.png)
+```
+/lua reload Sch-Hud-Reworked
+```
 
-# Addendum Black:
+This ensures your changes take effect.
 
-![alt text](https://i.imgur.com/SIti4Qg.png)
+---
 
-# Light Arts:
+## 🖼️ HUD Color Modes:
 
-![alt text](https://i.imgur.com/EOPaFdY.png)
+### **Dark Arts:**
 
-# Addendum White:
+![Dark Arts](https://i.imgur.com/8rAO6CH.png)
 
-![alt text](https://i.imgur.com/dxxXET8.png)
+### **Addendum Black:**
 
-# Exemple of render In-game:
+![Addendum Black](https://i.imgur.com/SIti4Qg.png)
 
-![alt text](https://i.imgur.com/ChfPOJc.png)
+### **Light Arts:**
+
+![Light Arts](https://i.imgur.com/EOPaFdY.png)
+
+### **Addendum White:**
+
+![Addendum White](https://i.imgur.com/dxxXET8.png)
+
+### **Example of In-Game Render:**
+
+![In-Game Screenshot](https://i.imgur.com/ChfPOJc.png)
+
+---
+
+## 🔧 Troubleshooting:
+
+If the HUD resets its position after reload, make sure:
+
+- You use the correct in-game commands (`//schud pos` and `//schud scale`).
+- The addon has write permissions in `data/settings.xml`.
+- Windower is running with admin privileges (if needed).
+
+---
+
+🚀 **SCH-Hud Reworked v1.3 is now more customizable, reliable, and immersive than ever!**  
+Let us know if you encounter any issues or have suggestions for improvements.
