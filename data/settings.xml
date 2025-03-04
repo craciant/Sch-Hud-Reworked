@@ -1,0 +1,12 @@
+<?xml version="1.1" ?>
+<settings>
+    <global>
+        <anchor_x>800</anchor_x>
+        <anchor_y>1040</anchor_y>
+        <hud_scale>1</hud_scale>
+    </global>
+    <tetsouo>
+        <anchor_x>0</anchor_x>
+        <anchor_y>0</anchor_y>
+    </tetsouo>
+</settings>
