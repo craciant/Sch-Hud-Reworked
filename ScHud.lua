@@ -4,8 +4,8 @@
 -- Modernized/optimized version with commands
 ------------------------------------------------------------------------------
 
-_addon.name                  = 'SCHud (Scholar Hud)'
-_addon.author                = 'Original NeonRAGE / Reworked Tetsouo'
+_addon.name                  = 'schud'
+_addon.author                = 'Original NeonRAGE / Reworked Tetsouo / Edited by Cracient'
 _addon.version               = '1.2'
 _addon.commands              = { 'schud' } -- Type //schud in-game
 
@@ -18,8 +18,8 @@ local texts                  = require('texts')
 ------------------------------------------------------------------------------
 -- HUD Texts
 ------------------------------------------------------------------------------
-local timer_text             = texts.new("")
-local strat_text             = texts.new("")
+local timer_text = texts.new("", { name = 'SCHud_timer_text' })
+local strat_text = texts.new("", { name = 'SCHud_strat_text' })
 
 ------------------------------------------------------------------------------
 -- HUD Scale (zoom). 1.0 = normal
@@ -347,10 +347,6 @@ windower.register_event('prerender', function()
 	end
 end)
 
--- Unload / cleanup
-windower.register_event('unload', function()
-	delete_prims('grimoire-d', 'grimoire-da', 'grimoire-l', 'grimoire-la')
-end)
 
 windower.register_event('logout', function()
 	set_hud_visibility(false)
@@ -408,3 +404,40 @@ windower.register_event('addon command', function(command, ...)
 		windower.add_to_chat(207, '[SCHud] Unknown command. Type //schud help for a list of commands.')
 	end
 end)
+
+
+------------------------------------------------------------------------------
+-- Clean shutdown: hide + destroy texts, hide + delete prims
+------------------------------------------------------------------------------
+local function cleanup_hud()
+ -- 1) Hide HUD (prevents one-frame artifacts)
+ pcall(set_hud_visibility, false)
+
+ -- 2) Clear and destroy text objects
+ if timer_text then
+	 pcall(texts.visible, timer_text, false)
+	 pcall(texts.text, timer_text, "")
+	 pcall(texts.destroy, timer_text)
+ end
+
+ if strat_text then
+	 pcall(texts.visible, strat_text, false)
+	 pcall(texts.text, strat_text, "")
+	 pcall(texts.destroy, strat_text)
+ end
+
+ -- 3) Delete all known image prims (authoritative path)
+ pcall(delete_prims, 'grimoire-d', 'grimoire-da', 'grimoire-l', 'grimoire-la')
+
+ -- 4) Hard fallback: delete by name again (covers weird partial states)
+ for _, p in ipairs({ 'grimoire-d', 'grimoire-da', 'grimoire-l', 'grimoire-la' }) do
+	 pcall(windower.prim.set_visibility, p, false)
+	 pcall(windower.prim.delete, p)
+ end
+end
+
+-- Unload / cleanup
+windower.register_event('unload', function()
+    cleanup_hud()
+end)
+
