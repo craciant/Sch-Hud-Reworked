@@ -1,4 +1,4 @@
-# SCH-Hud Reworked (v1.3)
+# SCH-Hud Reworked (v1.4)
 
 SCH-Hud Reworked is an enhanced version of the original SCH-Hud addon created by neonrage. This addon displays a book on your screen, offering an immersive interface to track your stratagem charges and cooldown timers.
 
@@ -22,6 +22,12 @@ SCH-Hud Reworked is an enhanced version of the original SCH-Hud addon created by
 - Originally, the addon was designed to work only when SCH was the main job.
 
 ---
+## Bug Fixes (Version 1.4)
+Changed the way text primitives are drawn and unloaded so that the addon unloads cleanly (for example, when changing jobs)
+
+
+--
+
 
 ## New Features and Enhancements (Version 1.3)
 
