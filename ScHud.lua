@@ -6,7 +6,7 @@
 
 _addon.name                  = 'schud'
 _addon.author                = 'Original NeonRAGE / Reworked Tetsouo / Edited by Cracient'
-_addon.version               = '1.2'
+_addon.version               = '1.4'
 _addon.commands              = { 'schud' } -- Type //schud in-game
 
 local config                 = require('config')
